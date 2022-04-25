@@ -1,15 +1,15 @@
-const mongoose = require('mongoose')
+const mongoose  = require("mongoose")
 
-
-
-const userSchema  = new mongoose.Schema({
-    username: String,
-    email: {
+const postSchema = new mongoose.Schema({
+    title: {
         type: String,
         required: true
     },
-    password: {
-
+    body:{
+        type:String,
+        required: true
+    },
+    category: {
         type: String,
         required:true
     },
@@ -17,16 +17,16 @@ const userSchema  = new mongoose.Schema({
         type: Date,
         default: ()=>Date.now()
     },
-    posts:[{
+    by: {
         type: mongoose.SchemaTypes.ObjectId,
-        ref: "Post"
-    }],
+        ref: "User"
+    },
     comments: [{
         type: mongoose.SchemaTypes.ObjectId,
         ref: "Comment"
     }]
+    
 
 })
 
-
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Post", postSchema);
