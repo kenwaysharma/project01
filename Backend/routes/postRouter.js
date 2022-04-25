@@ -4,7 +4,9 @@ const express = require('express');
 const router = express.Router()
 const User = require("../models/User")
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 const { ensureAuthenticated } = require('../config/auth');
+const { create } = require('../models/User');
 
 
 
@@ -40,7 +42,36 @@ router.post('/create', ensureAuthenticated,async (req,res)=>{
 })
 
 //Create new comment
+router.post('/create/comment/:id',ensureAuthenticated,async(req,res)=>{
+    //Get Comment, User and Post to create new comment and 
+    //add it to the post and the user the comment was made by.
+    const post_id = req.params.id;
+    const user = await User.findById(req.session.passport.user);
+    //Create new comment
+    const nComment = new Comment({
+        body: "This is the comment",
+        by: req.session.passport.user
+    })
+    //Save new comment    
+    nComment.save().then(async comment =>{
+        //Find the post in which to put the comment
+        Post.findById(post_id)
+        .then(async post=>{
+            console.log(post);
+        //Push the comment to the post
+        post.comments.push(comment)
+        await post.save();
+        console.log("saved comment to post")
+        //Push the comment to user profile
+        user.comments.push(comment)
+        await user.save();
+        console.log("saved comment to user")
+        })
+    })
+    
 
+
+})
 
 
 module.exports = router;
