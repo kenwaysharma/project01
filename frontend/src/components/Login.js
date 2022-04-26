@@ -22,7 +22,7 @@ const Login = () =>{
             email:log.email,
             password:log.password,
             
-          },{withCredentials:false},{
+          },{withCredentials:true},{
             headers: {
     
                   
@@ -35,6 +35,7 @@ const Login = () =>{
           
         }).then(res=>{
             console.log(res);
+
         })
         .catch(e=>{console.log(e)})
     }

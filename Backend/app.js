@@ -8,7 +8,7 @@ const passport = require('passport')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
-app.use(cors({credentials:true}));
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 
 
 //Passport config
@@ -19,7 +19,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser("secret"));
 app.use(session({
   cookie:{httpOnly:true,
-    domain: 'localhost:3000',
     maxAge: 1*60*60*1000},
     
     resave: false,
