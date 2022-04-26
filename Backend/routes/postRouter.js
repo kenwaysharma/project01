@@ -16,6 +16,7 @@ router.get('/', (req,res)=>{
 Post.find({})
 .then(posts=>{
     res.json(posts)
+    console.log(posts)
 })
 })
 

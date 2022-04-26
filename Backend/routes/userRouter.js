@@ -6,7 +6,7 @@ const User = require("../models/User")
 const {ensureAuthenticated} = require('../config/auth');
 const flash = require('express-flash');
 router.get('/',(req,res)=>{
-    res.send("HELLO SIR!");
+    res.json({msg:"HELLO SIRThe misster!"});
 })
 
 //Register or Create new user
@@ -48,7 +48,7 @@ if(errors.length>0){
             })
             //Save user to Db
             nUser.save().then(()=>{
-                console.log(">>Saved Successfully");
+                console.log(">> New user Saved Successfully");
                 res.json(nUser)          
             })
         }
@@ -81,6 +81,7 @@ router.get('/test',ensureAuthenticated, function(req, res) {
 //Login
 router.post('/login', (req,res,next)=>{
     const {email, password}=req.body;
+    console.log(email," ",password)
     passport.authenticate('local', {
         successRedirect : '/users/success',
         failureRedirect: '/users/fail',

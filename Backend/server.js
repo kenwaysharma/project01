@@ -1,5 +1,5 @@
 const app = require('./app')
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5000
 const mongoose = require('mongoose');
 
 mongoose.connect("mongodb+srv://kenwaysharma:hellobro12@stablxdemocluster.zh3bt.mongodb.net/BlogDB?retryWrites=true&w=majority", ()=>{
