@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(cookieParser("secret"));
 app.use(session({
-  cookie:{httpOnly:true,
+  cookie:{httpOnly:false,
     maxAge: 1*60*60*1000},
     
     resave: false,

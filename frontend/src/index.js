@@ -6,10 +6,12 @@ import {configureStore} from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import countReducer from './redux/reducer'
 import postReducer from './redux/postReducer';
+import userReducer from './redux/userReducer';
 
 const store = configureStore({
   reducer: {counter: countReducer,
-  posts: postReducer
+  posts: postReducer,
+  user: userReducer
   }
 })
 

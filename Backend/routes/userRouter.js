@@ -100,7 +100,7 @@ router.get('/logout', (req,res)=>{
         path: '/'
       });
       req.session.destroy();
-    res.json("logged Out!")
+    res.json("Success")
     
 } )
 
