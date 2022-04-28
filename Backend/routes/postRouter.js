@@ -14,7 +14,9 @@ const { create } = require('../models/User');
 //get all posts
 router.get('/', (req,res)=>{
 Post.find({})
+.populate("by")
 .then(posts=>{
+
     res.json(posts)
     console.log(posts)
 })

@@ -67,11 +67,9 @@ router.get('/success',ensureAuthenticated, function(req, res) {
         }
         res.json(tbs)
     })
-    
-    
 });
-router.get('/fail',ensureAuthenticated, function(req, res) {
-    res.json({msg: "Failed to login"});
+router.get('/fail', function(req, res) {
+    res.json({msg: "Please enter correct email and password"});
 });
 
 router.get('/test',ensureAuthenticated, function(req, res) {
@@ -82,12 +80,13 @@ router.get('/test',ensureAuthenticated, function(req, res) {
 router.post('/login', (req,res,next)=>{
     const {email, password}=req.body;
     console.log(email," ",password)
+    
     passport.authenticate('local', {
         successRedirect : '/users/success',
         failureRedirect: '/users/fail',
-        failureFlash: true
+        
 
-    })(req,res,next);
+    },)(req,res,next);
     
 })
 

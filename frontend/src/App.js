@@ -8,15 +8,19 @@ import {
 } from "react-router-dom";
 import Login from './components/Login';
 import Register from './components/Register';
+import Header from './components/Header';
+import CreatePost from './components/CreatePost';
 function App() {
 
 
   return (
 
     <BrowserRouter>
+     <Header />
     <Routes>
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
+    <Route path="/createpost" element={<CreatePost />} />
       <Route path="/" element={<Home /> } />
       
      
