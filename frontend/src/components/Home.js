@@ -10,7 +10,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import CreatePost from './CreatePost';
-
+import Cookies from 'js-cookie'
 const axios = require('axios').default;
 const {useState, useEffect} = require('react')
 const {Link} = require('react-router-dom')
@@ -20,18 +20,20 @@ const Home = (props)=>{
 const [state, setState] = useState([]);
 const allPosts = useSelector(state=>state.posts);
 const dispatch = useDispatch();
+console.log(allPosts)
 
 useEffect(()=>{
     axios.get('http://localhost:5000/post/')
     .then((res)=>{
-        console.log(res.data)
+        
         dispatch(putposts(res.data))
         setState(res.data)
     })
 },[])
 
- const posts = (allPosts[0]?
-  allPosts[0].map(x=>{
+
+ const posts = (allPosts?
+  allPosts.map(x=>{
       const {title, body, by} = x;
         return(
             <div key={x._id}>

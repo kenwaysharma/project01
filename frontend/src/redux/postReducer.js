@@ -7,14 +7,20 @@ export const postSlice = createSlice({
     initialState: [],
     reducers:{
         putposts: (state,action)=>{
-            state.push(action.payload) 
+           
+            action.payload.forEach(element => {
+                state.push(element)
+            });
+    
         },
-        decrement: (state,action)=>{
-            state.count-=action.payload;
+        addone:(state,action)=>{
+            state.push(action.payload)
+    
         }
+        
         }
 })
 
 
-export const {putposts,decrement} = postSlice.actions;
+export const {putposts, addone} = postSlice.actions;
 export default postSlice.reducer;

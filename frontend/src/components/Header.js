@@ -3,8 +3,6 @@ import { Link } from "react-router-dom"
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import userReducer, { logOut } from "../redux/userReducer";
 import { useSelector, useDispatch } from "react-redux";
-
-import axios from "axios";
 import Cookies from "js-cookie";
 const Header = () =>{
     const dispatch = useDispatch();
@@ -30,8 +28,6 @@ dispatch(logOut())
 
     return(
         <>
-    
-    
      <CssBaseline />
         <AppBar position='relative'>
             <Toolbar>
@@ -60,7 +56,7 @@ dispatch(logOut())
                             </Button>
                         </Link>
                     </Grid>
-                    <Grid item display={!display}>
+                    <Grid item display={display!='none'?'none':'block'}>
                         
                     <Button variant="contained" color="secondary" onClick={logout}>
                            Logout
@@ -71,7 +67,6 @@ dispatch(logOut())
                 </Grid>
                 
             </Toolbar>
-
         </AppBar>
     </>
     )

@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import produce from "immer";
 import { Action } from "history";
+import Cookies from "js-cookie";
 
 export const userSlice = createSlice({
     name: "user",
     initialState: {
-        isLogged: false,
-        username:''
+        isLogged: (Cookies.get('connect.sid')?Cookies.get('connect.sid'):false),
+        username:(Cookies.get('username')?Cookies.get('username'):''),
+        userID: (Cookies.get('userID')?Cookies.get('userID'):'')
 
     },
     reducers:{

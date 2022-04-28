@@ -1,14 +1,18 @@
 
 import React ,{useState, useContext, useReducer}from 'react';
-import {useHistory,Redirect} from 'react-router-dom'
+import {useHistory,Redirect, Navigate, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../redux/userReducer';
 import Cookies from 'js-cookie'
 const Login = () =>{
+    const navigate = useNavigate();
     const [log,setLog] = useState({msg:''})
     const user = useSelector(state=>state.user);
+    
+    
     const dispatch = useDispatch();
+    
     const handleChange=(e)=>{
         const {name,value}=e.target
         setLog({ ...log, [name]: value });
@@ -37,7 +41,7 @@ const Login = () =>{
                 dispatch(setUser(res.data))
                 Cookies.set('username',res.data.username, {expires:5})
                 Cookies.set('userID',res.data.user_id, {expires:5})
-
+                navigate('/')
                 setLog({msg: "You are now Logged In!"})
             }else{
                 setLog({msg: res.data.msg})
