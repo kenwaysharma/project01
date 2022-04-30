@@ -12,33 +12,19 @@ router.get('/',(req,res)=>{
 //Register or Create new user
 router.post('/register',(req,res)=>{
     const {username,email,password,passwordConfirm } = req.body;
+console.log(username,email,password,passwordConfirm )
 
-let errors = [];
-
-//Check required field
-if(!username || !email || !password){
-    errors.push({msg: 'Please fill all the fields'})
-}
 
 //Check if Passwords match
 if(password!=passwordConfirm){
-    errors.push({msg: "Passwords do not match"})
-}
-
-//Check pass Length
-if(password.length<3){
-    errors.push({msg: "Password requires minimum 3 characters"})
-}
-
-if(errors.length>0){
-    res.json(errors);
+    res.json("Password do not match")
 }else{
     //Check if user exists
     User.findOne({email: email})
     .then(user=>{
         if(user){
-            errors.push({msg: 'Email already registered'});
-            res.json(errors);
+            res.json("Email already registered")
+            
         }else{
             //If user does not exist then create new user
             const nUser = new User({
@@ -49,7 +35,7 @@ if(errors.length>0){
             //Save user to Db
             nUser.save().then(()=>{
                 console.log(">> New user Saved Successfully");
-                res.json(nUser)          
+                   res.json("Registered")       
             })
         }
     })   

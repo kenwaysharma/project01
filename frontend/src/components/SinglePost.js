@@ -59,7 +59,7 @@ useEffect(()=>{
                     display?
                          (
                             <Grid item>
-                                <CommentsHandler comments = {post.comments} />
+                                <CommentsHandler comments = {post.comments} post_id={post._id}/>
                             </Grid>
                     )
                     :''

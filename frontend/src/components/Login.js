@@ -5,6 +5,8 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../redux/userReducer';
 import Cookies from 'js-cookie'
+import Typography from '@mui/material/Typography'
+import { Card, Grid, Container, TextField,Button } from '@mui/material';
 const Login = () =>{
     const navigate = useNavigate();
     const [log,setLog] = useState({msg:''})
@@ -52,21 +54,27 @@ const Login = () =>{
 
     return(
         <div>
-            {log.msg?log.msg:''}
-            <h1>This is the Login page welcome sir!</h1>
-            <div>
             
-            <form onSubmit={handleSubmit}>
             
-            <label name='email' >Email:</label>
-            <input name='email' onChange={handleChange}></input>
+            
+            <Container maxWidth="lg" >
+            
+                <Grid container direction="column" justifyContent="center" alignItems="center" alignContent="center" wrap="wrap">
+                    <Typography variant="body1" color="red" marginTop={5}>{log.msg?log.msg:''}</Typography>
+                  <Typography variant="h2" color="initial" marginTop={5}>Login</Typography>
+                  <Grid item marginTop={5}>
+                  <TextField id="outlined-basic" label="email" name='email' variant="outlined" onChange={handleChange}/>
+                  </Grid>
+                  <Grid item marginTop={2}>
+                  <TextField id="outlined-password-input" label="Password" name='password' type="password" onChange={handleChange} autoComplete="current-password"/>
 
-            <label name='password' >password:</label>
-            <input name='password' onChange={handleChange} ></input>
-
-            <button>submit</button>
-            </form>
-        </div>
+                  </Grid>
+                    <Button variant="text" color="primary" onClick={handleSubmit}>
+                            Submit
+                     </Button>
+                </Grid>
+              
+            </Container>
         </div>
     )
 }

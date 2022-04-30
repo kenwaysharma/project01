@@ -74,8 +74,9 @@ router.post('/create/comment/:id',ensureAuthenticated,async(req,res)=>{
     const post_id = req.params.id;
     const user = await User.findById(req.session.passport.user);
     //Create new comment
+    console.log(req.session.passport.user)
     const nComment = new Comment({
-        body: "This is the comment",
+        body: req.body.body,
         by: req.session.passport.user
     })
     //Save new comment    
@@ -83,7 +84,7 @@ router.post('/create/comment/:id',ensureAuthenticated,async(req,res)=>{
         //Find the post in which to put the comment
         Post.findById(post_id)
         .then(async post=>{
-            console.log(post);
+            
         //Push the comment to the post
         post.comments.push(comment)
         await post.save();
@@ -91,7 +92,7 @@ router.post('/create/comment/:id',ensureAuthenticated,async(req,res)=>{
         //Push the comment to user profile
         user.comments.push(comment)
         await user.save();
-        console.log("saved comment to user")
+        res.json(nComment)
         })
     })
     
