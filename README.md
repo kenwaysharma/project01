@@ -27,3 +27,4 @@ Database Connect...
 **List of things not implemented currently:**
 1. Replying to comments
 2. Bookmarking
+3. Encryption of Password
