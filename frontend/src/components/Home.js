@@ -11,36 +11,38 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import CreatePost from './CreatePost';
 import Cookies from 'js-cookie'
+import CircularProgress from '@mui/material/CircularProgress';
+
 const axios = require('axios').default;
 const {useState, useEffect} = require('react')
 const {Link} = require('react-router-dom')
 const {Button, AppBar, Toolbar} = require("@mui/material")
 
+
 const Home = (props)=>{
-const [state, setState] = useState([]);
+const [loading, setLoading] = useState(true);
 const allPosts = useSelector(state=>state.posts);
 const dispatch = useDispatch();
-console.log(allPosts)
 
 useEffect(()=>{
     axios.get('http://localhost:5000/post/')
     .then((res)=>{
         
         dispatch(putposts(res.data))
-        setState(res.data)
+        //setState(res.data)
+        setLoading(false)
     })
-},[])
+},[])     
 
-
- const posts = (allPosts?
+ const posts = 
   allPosts.map(x=>{
       const {title, body, by} = x;
         return(
             <div key={x._id}>
-                <Post title={title} body={body} by={by.username} comment={x.comments?x.comments.length:''}/>
+                <Post title={title} body={body} by={by.username} comment={x.comments?x.comments.length:''} id={x._id}/>
             </div>
         )
-}):"Laoding")
+})
 
     return(
         <>
@@ -67,16 +69,12 @@ useEffect(()=>{
             </div>
             <Container maxWidth="md" >
                 <Grid container direction="row" alignItems="center" justifyContent="center">
-                    {posts}
+                    {!loading?posts:(<Box margin={4} sx={{ display: 'flex' }}><CircularProgress /></Box>)}
                 </Grid>
-              
             </Container>
-        
         </main>
         </>
     )
-
 }
-
 
 export default Home;

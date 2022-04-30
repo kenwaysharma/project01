@@ -17,13 +17,13 @@ const navigate = useNavigate();
 const user = useSelector(state=>state.user);
 const allPosts = useSelector(state=>state.posts)
 const dispatch = useDispatch()
+
     const handleSubmit=(e)=>{
         e.preventDefault()
 
        
         if(user.isLogged){
             if(post.title.length<6){
-                console.log(post.title)
                 setErorrs("Title should be minimum 6 characters")
             }else if(post.body.length<20){
                 setErorrs("Body should be minimum 20 characters")
@@ -41,12 +41,9 @@ const dispatch = useDispatch()
                             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
                             }
                 }).then( post=>{
-                        if(post.data.title){
-                            console.log(post)
-                            dispatch(addone(post.data))
-                            
-                            
-                            navigate(`/`)
+                        if(post.data.title){       
+                            dispatch(addone(post.data))               
+                            navigate('/')
                         }
                         
                 })

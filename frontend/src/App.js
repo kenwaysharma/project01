@@ -10,6 +10,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Header from './components/Header';
 import CreatePost from './components/CreatePost';
+import SinglePost from './components/SinglePost';
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
     <Route path="/createpost" element={<CreatePost />} />
- 
+    <Route path="/post/:id" element={<SinglePost  />} />
       <Route path="/" element={<Home /> } />
       
      

@@ -44,6 +44,29 @@ router.post('/create', ensureAuthenticated,async (req,res)=>{
 
 })
 
+router.get('/single/:id', async (req,res)=>{
+    const id = req.params.id;
+    console.log(id)
+    Post.findById(id)
+    .populate({
+        path: 'comments',
+        model: 'Comment',
+        populate: [{
+            path: 'by',
+            model: 'User',
+            select: {'username':1},
+        }]
+    }).populate("by", "-password -email -posts")
+    .then((post=>{
+        res.json(post)
+    })).catch(e=>{
+        if(e.name=="CastError"){
+            res.json({msg:"Post not found"})
+        }
+    })
+    
+})
+
 //Create new comment
 router.post('/create/comment/:id',ensureAuthenticated,async(req,res)=>{
     //Get Comment, User and Post to create new comment and 

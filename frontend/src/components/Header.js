@@ -12,19 +12,13 @@ const Header = () =>{
         display= 'none';
     }
 
-  
-
+//Logout handler
 const logout = ()=>{
-
 Cookies.remove('username');
 Cookies.remove('userID');
 Cookies.remove('connect.sid');
 dispatch(logOut())
-    
-
 }
-
-
 
     return(
         <>
@@ -33,10 +27,10 @@ dispatch(logOut())
             <Toolbar>
                 <Grid container spacing={3}>
                     <Grid item>
-                        <Typography variant="h6" gutterBottom>Simple Blog</Typography>
+                        <Typography variant="h5" gutterBottom>STABLX</Typography>
                     </Grid>
                     <Grid item >
-                        <Link to={'/'}> 
+                        <Link to={'/'} > 
                             <Button variant="outlined" color="secondary" >
                                    <HomeRoundedIcon />
                             </Button>
