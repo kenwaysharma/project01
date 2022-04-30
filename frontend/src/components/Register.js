@@ -1,23 +1,15 @@
-import React ,{useState, useContext}from 'react';
-import {useHistory,Redirect, useNavigate} from 'react-router-dom'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { Grid,Typography, Button, TextField,Container  } from '@mui/material';
-
-
 const Register = () =>{
-    
     const navigate = useNavigate();
 const [log,setLog] = useState({username:'',email:'', password:'',passwordConfirm:''})
 const [errors, setErrors] = useState('')
-
 const handleChange=(e)=>{
     const {name,value}=e.target
     setLog({ ...log, [name]: value });
-
 } 
-
-
-
 const handleSubmit = (e)=>{
     e.preventDefault();
     if(log.username<6){
@@ -28,12 +20,10 @@ const handleSubmit = (e)=>{
         setErrors('Password requires minimum 6 characters')
     }else{
         axios.post('http://localhost:5000/users/register', {
-          
             email:log.email,
             username: log.username,
             password:log.password,
             passwordConfirm:log.passwordConfirm
-            
           },{withCredentials:true},{
             headers: { 
                     'Content-Type': 'application/json',
@@ -42,7 +32,7 @@ const handleSubmit = (e)=>{
       }
         }).then(res=>{
             console.log(res)
-            if(res.data=="Registered"){
+            if(res.data==="Registered"){
                 navigate('/login')
             }else{
                 setErrors(res.data)
@@ -50,9 +40,7 @@ const handleSubmit = (e)=>{
         })
         .catch(e=>{console.log(e)})
     }
-    
 }
-
 return(
     <div>
         <Container maxWidth="lg" >
@@ -75,10 +63,8 @@ return(
                         Submit
                  </Button>
             </Grid>
-          
         </Container>
     </div>
 )
 }
-
 export default Register

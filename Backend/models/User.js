@@ -1,7 +1,4 @@
 const mongoose = require('mongoose')
-
-
-
 const userSchema  = new mongoose.Schema({
     username: String,
     email: {
@@ -24,8 +21,5 @@ const userSchema  = new mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         ref: "Comment"
     }]
-
 })
-
-
 module.exports = mongoose.model("User", userSchema);

@@ -1,5 +1,4 @@
 const mongoose  = require("mongoose")
-
 const postSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -21,8 +20,5 @@ const postSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId,
         ref: "Comment"
     }]
-    
-
 })
-
 module.exports = mongoose.model("Post", postSchema);

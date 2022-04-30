@@ -1,39 +1,27 @@
-
 import Post from './Post';
 import { useSelector, useDispatch } from 'react-redux'
 import { putposts } from '../redux/postReducer';
-import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
-import CreatePost from './CreatePost';
-import Cookies from 'js-cookie'
 import CircularProgress from '@mui/material/CircularProgress';
-
 const axios = require('axios').default;
 const {useState, useEffect} = require('react')
 const {Link} = require('react-router-dom')
-const {Button, AppBar, Toolbar} = require("@mui/material")
-
-
+const {Button} = require("@mui/material")
 const Home = (props)=>{
 const [loading, setLoading] = useState(true);
 const allPosts = useSelector(state=>state.posts);
 const dispatch = useDispatch();
-
 useEffect(()=>{
     axios.get('http://localhost:5000/post/')
     .then((res)=>{
-        
         dispatch(putposts(res.data))
         //setState(res.data)
         setLoading(false)
     })
 },[])     
-
  const posts = 
   allPosts.map(x=>{
       const {title, body, by} = x;
@@ -43,7 +31,6 @@ useEffect(()=>{
             </div>
         )
 })
-
     return(
         <>
         <main>
@@ -60,9 +47,7 @@ useEffect(()=>{
                              </Link>
                          </Grid>
                          <Grid item>
-                             
                          </Grid>
-                       
                      </Grid>
                  </div>
                 </Container>
@@ -76,5 +61,4 @@ useEffect(()=>{
         </>
     )
 }
-
 export default Home;

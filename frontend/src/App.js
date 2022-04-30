@@ -1,6 +1,4 @@
-import './App.css';
 import Home from './components/Home';
-import { render } from "react-dom";
 import {
   BrowserRouter,
   Routes,
@@ -11,12 +9,8 @@ import Register from './components/Register';
 import Header from './components/Header';
 import CreatePost from './components/CreatePost';
 import SinglePost from './components/SinglePost';
-
 function App() {
-
-
   return (
-
     <BrowserRouter>
      <Header />
     <Routes>
@@ -25,11 +19,8 @@ function App() {
     <Route path="/createpost" element={<CreatePost />} />
     <Route path="/post/:id" element={<SinglePost  />} />
       <Route path="/" element={<Home /> } />
-      
-     
     </Routes>
   </BrowserRouter>
   );
 }
-
 export default App;

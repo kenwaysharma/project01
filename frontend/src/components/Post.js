@@ -1,23 +1,14 @@
 import { Grid, Typography, CardActions,Badge, Button } from "@mui/material"
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
-import { CardActionArea } from '@mui/material';
-import { Link, useNavigate } from "react-router-dom";
-
-
+import { Link } from "react-router-dom";
 const Post = (props)=>{
-
-  
     return(
-     
-
       <Grid item xs={12} >
          <Card sx={{ maxWidth: 345 ,
         margin:3,
         minWidth:275}}>
-      
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {props.title}
@@ -29,7 +20,6 @@ const Post = (props)=>{
           by {props.by}
         </Typography>
       </CardContent>
-     
       <CardActions>
         {props.comment?<Badge badgeContent={props.comment} color="primary"><ModeCommentOutlinedIcon /></Badge>:''}
         <Link to={`/post/${props.id}`}><Button size="small" align='right' >Read</Button></Link>
@@ -38,5 +28,4 @@ const Post = (props)=>{
       </Grid>
     )
 }
-
 export default Post

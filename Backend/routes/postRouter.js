@@ -1,31 +1,22 @@
 const express = require('express');
-
-
 const router = express.Router()
 const User = require("../models/User")
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 const { ensureAuthenticated } = require('../config/auth');
 const { create } = require('../models/User');
-
-
-
-
 //get all posts
 router.get('/', (req,res)=>{
 Post.find({})
 .populate("by")
 .then(posts=>{
-
     res.json(posts)
     console.log(posts)
 })
 })
-
 //create new post
 router.post('/create', ensureAuthenticated,async (req,res)=>{
     const user = await User.findById(req.session.passport.user)
-
     const {title, body, category} = req.body;
     const nPost = new Post({
         title,
@@ -40,10 +31,7 @@ router.post('/create', ensureAuthenticated,async (req,res)=>{
         console.log(user);
         res.json(post)
     })
-
-
 })
-
 router.get('/single/:id', async (req,res)=>{
     const id = req.params.id;
     console.log(id)
@@ -64,9 +52,7 @@ router.get('/single/:id', async (req,res)=>{
             res.json({msg:"Post not found"})
         }
     })
-    
 })
-
 //Create new comment
 router.post('/create/comment/:id',ensureAuthenticated,async(req,res)=>{
     //Get Comment, User and Post to create new comment and 
@@ -84,7 +70,6 @@ router.post('/create/comment/:id',ensureAuthenticated,async(req,res)=>{
         //Find the post in which to put the comment
         Post.findById(post_id)
         .then(async post=>{
-            
         //Push the comment to the post
         post.comments.push(comment)
         await post.save();
@@ -95,10 +80,5 @@ router.post('/create/comment/:id',ensureAuthenticated,async(req,res)=>{
         res.json(nComment)
         })
     })
-    
-
-
 })
-
-
 module.exports = router;
